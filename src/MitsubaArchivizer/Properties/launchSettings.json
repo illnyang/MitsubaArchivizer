@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "MitsubaArchivizer.CLI": {
+      "commandName": "Project",
+      "commandLineArgs": "json -f -t \"https://karachan.org/b/res/18380503.html\""
+    }
+  }
+}
