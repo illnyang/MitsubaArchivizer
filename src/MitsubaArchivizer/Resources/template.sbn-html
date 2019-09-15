@@ -1,0 +1,151 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="referrer" content="same-origin">
+    <title>/{{thread.board}}/ - archiwa kurahenu</title>
+    <link rel="stylesheet" href="../Resources/css/fonts.googleapis.css">
+    <link rel="stylesheet" href="../Resources/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../Resources/css/global.css">
+    <link rel="stylesheet" href="../Resources/css/mobile.css">
+    <link rel="stylesheet" href="../Resources/styles/{{style}}">
+	{{ if use_names }}
+	<style>
+	.uidhighlight {
+		 padding: 2px 6px;
+		 margin-right: 4px;
+		 font-size: 11px;
+		 cursor: pointer;
+		 border-radius: 6px; 
+		 font-weight: bold; 
+		 {{ if use_colors }}
+		 text-shadow: rgb(0, 0, 0) 0px 0px 5px;
+		 color: white;
+		 {{ else }}
+		 text-shadow: none;
+		 color: inherit;
+		 background-color: none;
+		 {{ end }}
+	}
+	</style>
+	{{ end }}
+	{{ func get_color }}
+		{{ if use_colors }}
+style="background-color: rgb({{$0.name_color.r}}, {{$0.name_color.g}}, {{$0.name_color.b}})"
+		{{ end }}
+    {{ end }}
+    {{ func get_preview }}
+        {{ if $0.embed_url }}
+<a class="fileThumb"><iframe width="250" height="250" src="{{$0.embed_url}}" frameborder="0" allowfullscreen=""></iframe></a> 
+        {{ else if $0.file.file_thumb_url == "SPOILER" }}
+<a class="fileThumb" href="{{$0.file.file_url}}" target="_blank"><img src="../Resources/img/spoiler.png"></a>  
+        {{ else if $0.file.file_thumb_url }}
+            {{ if ($0.file.file_url | string.ends_with "webm") }}
+                {{ file_class = "fileThumb video webm" }}
+            {{ else if ($0.file.file_url | string.ends_with "mp4") }}
+                {{ file_class = "fileThumb video webm" }}
+            {{ else }}
+                {{ file_class = "fileThumb" }}
+            {{ end }}
+<a class="{{file_class}}" href="{{$0.file.file_url}}" target="_blank"><img src="{{$0.file.file_thumb_url}}"></a> 
+        {{ else }}
+            {{ if $1 }}
+                {{ max = 275 }}
+            {{ else }}
+                {{ max = 200 }}
+            {{ end }}
+            {{ if ($0.file.file_url | string.ends_with "webm") || ($0.file.file_url | string.ends_with "mp4")}}
+<video controls class="fileThumb" style="max-width: {{max}}px; max-height: {{max}}px;"><source src="{{$0.file.file_url}}"></video>
+            {{ else }}
+<a class="fileThumb" href="{{$0.file.file_url}}" target="_blank"><img src="{{$0.file.file_url}}" style="max-width: {{max}}px; max-height: {{max}}px;"></a>
+            {{ end }}       
+        {{ end }}
+    {{ end }}
+    {{ func get_fileentry }}
+        {{ if $0.embed_url }}
+<a href="{{$0.embed_url}}">File</a>: <span>Embed</span>
+        {{ else }}
+<a href="{{$0.file.file_url}}">File</a>: <span>({{$0.file.file_name}})</span>
+        {{ end }}
+    {{ end }}
+</head>
+
+<body>
+    <div class="boardBanner" style="margin-top: 10px;">
+        <div class="boardTitle">/{{thread.board}}/ - archiwa kurahenu</div>
+		<blockquote><span class="quote">&gt;archiwizowanie śmietnika</span></blockquote>
+    </div>
+    <br>
+    <hr>
+    <div class="board hires">
+        <div class="thread">		
+            {{ for idx in 0..(thread.posts.size - 1) }}
+                {{ post = thread.posts[idx] }}
+                {{ if idx == 0 }}
+                    {{ post_container_class = "postContainer opContainer" }}
+                    {{ post_class = "post op" }}
+                {{ else }}
+                    {{ post_container_class = "postContainer replyContainer" }}
+                    {{ post_class = "post reply" }}
+                {{ end }}
+
+            <div class="{{post_container_class}}">
+                <div id="p{{post.number}}" class="{{post_class}}">
+                    <div class="postInfo">
+                        <span class="subject">{{post.subject}}</span>
+						<span class="nameBlock">
+                        <span class="name">{{post.email}}</span>
+						{{ if (use_names && post.id) }}
+                        <span title="{{post.id}}" class="posteruid uidhighlight"{{get_color post}}>{{post.name}}</span>
+                            {{ if use_same_fag_count}}
+                            <span class="samefagCLabel uidhighlight div.post div.postInfo span.nameBlock span.name"{{get_color post}}>{{post_count[post.id]}}</span>
+                            {{ end }}
+                        {{ else if post.id }}
+                        <span class="posteruid">(ID: {{post.id}})</span>
+                            {{ if use_same_fag_count}}
+                            <span>[{{post_count[post.id]}}]</span>
+                            {{ end }}
+						{{ end }}
+						</span>
+						<span class="dateTime">{{post.date | date.to_string `%d/%m/%Y(%a)%H:%M:%S`}}</span>
+						<span class="postNum"><a href="#p{{post.number}}" title="Highlight this post">No. {{post.number}}</a>
+                        {{ if idx == 0 }}
+                        </span><span class="threadStats"> [ {{thread.posts.size + 1}} replies / {{unique_ids}} uniq IDs / {{same_fag_ratio | math.format "0.00"}} SFR ]</span>
+                        {{ end }}
+                    </div>
+                    {{ if (post.file || post.embed_url) }}
+                    <div class="file">
+                        <div class="fileInfo">
+                            <span class="fileText">
+                                {{ get_fileentry post }}
+                            </span>
+                        </div>
+
+                        {{ get_preview post (idx == 0) }}
+                    </div>
+                    {{ end }}
+                    {{ if (post.file || post.embed_url )}}
+                    {{ post_message_class = "postMessage postwImage" }}
+                    {{ else }}
+                    {{ post_message_class = "postMessage" }}
+                    {{ end }}
+					<blockquote class="{{post_message_class}}">
+                        {{post.message_body}}
+                        {{ if post_references[post.number] }}
+                        <div class="backlink">
+                            <hr>
+                            {{ for ref in post_references[post.number] }}
+                            <span><a href="#p{{ref}}" class="quotelink">&gt;&gt;{{ref}}</a> </span>
+                            {{ end }}
+                        </div>
+                        {{ end }}
+                    </blockquote>
+                </div>
+            </div>     
+            {{ end }}
+        </div>
+    </div>
+</body>
+
+</html>
