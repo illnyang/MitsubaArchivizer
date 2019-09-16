@@ -10,7 +10,7 @@ using MitsubaArchivizer.Models;
 using MitsubaArchivizer.Utils;
 using Url = Flurl.Url;
 
-namespace MitsubaArchivizer.CLI
+namespace MitsubaArchivizer
 {
     internal static class ThreadParser
     {
