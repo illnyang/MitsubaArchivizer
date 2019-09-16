@@ -27,16 +27,16 @@ namespace MitsubaArchivizer.Utils
 
         public static Tuple<string, Color> GetHighlightForPost(uint threadId, string posterId)
         {
-            SeedRandom.Seed($"{posterId}_t{threadId}");
+            var rnd = new SeedRandom($"{posterId}_t{threadId}");
 
-            var h = (Math.Floor(SeedRandom.Random() * 37) * 10) / 360.0;
+            var h = (Math.Floor(rnd.Random() * 37) * 10) / 360.0;
             const double s = 0.80;
             const double l = 0.61;
 
             // dummy call to keep deterministic consistency with karakao ork. no kurwa moje najszczersze gratulacje djmati xD
-            SeedRandom.Random();
+            rnd.Random();
 
-            var idx = (int) Math.Floor(SeedRandom.Random() * Names.Count);
+            var idx = (int) Math.Floor(rnd.Random() * Names.Count);
             return new Tuple<string, Color>(Names[idx], FromHSL(h, s, l));
         }
         
