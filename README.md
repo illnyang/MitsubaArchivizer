@@ -2,7 +2,8 @@
 ![archiwa kurahenu](dist/logo.png)
 # Mitsuba Archivizer
 Ultymatywne narzędzie do archiwizowania karakao.ork. Pozwala na zapisywanie wszystkich załączonych, generowanie JSON'a do dalszej obróbki, a także w pełni samodzielnego, pozbawionego JavaScripta pliku HTML wraz z **działającymi wordfilterami,** spoilerami, **kolorowymi nazwami**, licznikiem postów i wszystkim co można sobie wymarzyć.
-> \>kucowanie scrapera w c#
+> \>kucowanie scrapera w c#  
+> \>kalkulator 800MB ramu fejs
 
 # Usage
 
@@ -62,8 +63,7 @@ wykucowane by DJMATI
 
 	  USAGE:
 	Download media from a mixed list of URLs/thread-ids into a custom directory:
-	  dotnet MitsubaArchivizer.dll media --out /home/anon/archiwa-kurahenu/ b_2137 c_1337 https://karakao.ork/p/res
-	/1488.html
+	  dotnet MitsubaArchivizer.dll media --out /home/anon/archiwa-kurahenu/ b_2137 c_1337 https://karakao.ork/p/res/1488.html
 	Download media, download all thumbnails, restrict to certain extensions:
 	  dotnet MitsubaArchivizer.dll media --extensions gif,png,jpg --thumbnails <arg1> <arg2> ... <argN>
 
