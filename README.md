@@ -27,9 +27,9 @@ wykucowane by DJMATI
 
 	  --no-media               Don't download media files.
 	  --prettify               Prettify output HTML file.
-	  --no-names               Use randomly-chosen names instead of plain text.
-	  --no-colored-names       Use randomly-chosen color for names.
-	  --no-samefag-count       Include post-count next to the poster ID.
+	  --no-names               Don't use randomly-chosen names instead of plain text.
+	  --no-colored-names       Don't use randomly-chosen color for names.
+	  --no-samefag-count       Don't include post-count next to the poster ID.
 	  --style                  (Default: dark_roach.css) Go check out 'Resources/styles' directory.
 	  -e, --extensions         Comma separated list of allowed media files extensions.
 	  -o, --out                Output directory, defaults to current working directory.

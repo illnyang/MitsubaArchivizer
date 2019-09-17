@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 using AngleSharp;
 using CommandLine;
 using CommandLine.Text;
-using MitsubaArchivizer.CLI;
 using MitsubaArchivizer.Models;
 using MitsubaArchivizer.Options;
 using Newtonsoft.Json;

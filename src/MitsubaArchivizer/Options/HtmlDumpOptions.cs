@@ -13,13 +13,13 @@ namespace MitsubaArchivizer.Options
         [Option("prettify", HelpText = "Prettify output HTML file.")]
         public bool Prettify { get; set; }
         
-        [Option("no-names", HelpText = "Use randomly-chosen names instead of plain text.")]
+        [Option("no-names", HelpText = "Don't use randomly-chosen names instead of plain text.")]
         public bool DontIncludeCustomPosterNames { get; set; }
         
-        [Option("no-colored-names", HelpText = "Use randomly-chosen color for names.")]
+        [Option("no-colored-names", HelpText = "Don't use randomly-chosen color for names.")]
         public bool DontUseColoredNames { get; set; }
         
-        [Option("no-samefag-count", HelpText = "Include post-count next to the poster ID.")]
+        [Option("no-samefag-count", HelpText = "Don't include post-count next to the poster ID.")]
         public bool DontIncludeSameFagCount { get; set; }
         
         [Option("style", Default = "dark_roach.css", HelpText = "Go check out 'Resources/styles' directory.")]
