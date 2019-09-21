@@ -2,7 +2,7 @@
 using CommandLine;
 using CommandLine.Text;
 
-namespace MitsubaArchivizer.Options
+namespace MitsubaArchivizer.CLI.Options
 {
     [Verb("html", HelpText = "Parses thread data and generates a human-readable, self-contained HTML page.")]
     internal class HtmlDumpOptions : BaseOptions
@@ -25,19 +25,13 @@ namespace MitsubaArchivizer.Options
         [Option("style", Default = "dark_roach.css", HelpText = "Go check out 'Resources/styles' directory.")]
         public string Style { get; set; }
         
-        [Usage(ApplicationAlias = "dotnet MitsubaArchivizer.dll")]
+        [Usage(ApplicationAlias = "dotnet MitsubaArchivizer.CLI.dll")]
         public static IEnumerable<Example> Examples {
             get {
                 yield return new Example("Generate HTML, download media from a mixed list of URLs/thread-ids into a custom directory", new HtmlDumpOptions()
                 {
                     InputSeq = new [] {"b_2137", "c_1337", "https://karakao.ork/p/res/1488.html"},
                     OutputDirectory = "/home/anon/archiwa-kurahenu/",
-                });
-                yield return new Example("Generate HTML, download media, download all thumbnails, restrict to certain extensions", new HtmlDumpOptions()
-                {
-                    InputSeq = new [] {"<arg1>", "<arg2>", "...", "<argN>"},
-                    DownloadThumbnails = true,
-                    AllowedMediaExtensions = new [] {"gif", "png", "jpg"}
                 });
                 yield return new Example("Generate HTML with custom style", new HtmlDumpOptions()
                 {

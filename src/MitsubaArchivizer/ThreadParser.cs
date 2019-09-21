@@ -12,11 +12,15 @@ using Url = Flurl.Url;
 
 namespace MitsubaArchivizer
 {
-    internal static class ThreadParser
+    public static class ThreadParser
     {
+        public delegate void PostCount(int count);
+        public static event PostCount OnPostCount;
+
+        public delegate void PostParsing(int idx);
+        public static event PostParsing OnPostParsing;
+
         private const string Domain = "karachan.org";
-        
-        private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
 
         private static string SanitizeRelativeSrcUrl(string url, int idx) => url != null ? Url.Combine($"https://{Domain}/", url.Substring(idx)) : null;
         private static Uri GetThreadUri(string board, uint id) => new Uri($@"https://{Domain}/{board}/res/{id}.html"); 
@@ -87,17 +91,18 @@ namespace MitsubaArchivizer
                     Board = board,
                 };
 
-                Logger.Info("Parsing OP post.");
-                
-                var opPost = ParsePostInternal(elemThread.Children.First(), id);
+                var children = elemThread.Children.ToArray();
+
+                OnPostCount?.Invoke(children.Length);
+                OnPostParsing?.Invoke(0);
+
+                var opPost = ParsePostInternal(children[0], id);
                 result.Posts.Add(opPost);
-                
-                Logger.Info("Parsing remaining {0} posts.", elemThread.Children.Length);
-                
-                foreach (var elemPostContainer in elemThread.Children.Skip(1))
+
+                for (var i = 1; i < children.Length; i++)
                 {
-                    result.Posts.Add(ParsePostInternal(elemPostContainer, id, opPost.Id));
-                    Logger.Info("Parsing post: {0}/{1}", result.Posts.Count, elemThread.Children.Length);
+                    OnPostParsing?.Invoke(i);
+                    result.Posts.Add(ParsePostInternal(children[i], id, opPost.Id));
                 }
 
                 return result;
@@ -179,7 +184,7 @@ namespace MitsubaArchivizer
 
                 foreach (var img in images)
                 {
-                    img.SetAttribute("src", "../Resources/" + img.GetAttribute("src"));
+                    img.SetAttribute("src", "../Resources/" + img.GetAttribute("src").Trim('/'));
                 }
             }
 
@@ -189,7 +194,7 @@ namespace MitsubaArchivizer
             {
                 var backup = elemPostMessage.InnerHtml;
                 elemPostMessage.InnerHtml = elemPostMessage.InnerHtml
-                    .Replace("<br>", "\n", StringComparison.InvariantCultureIgnoreCase)
+                    .Replace("<br>", "\n")
                     .Trim('\n');
                 result.MessageText = elemPostMessage.Text().Trim().Replace("  ", " ").Replace(" \n", "\n");
                 elemPostMessage.InnerHtml = backup;

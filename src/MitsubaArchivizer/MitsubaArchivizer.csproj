@@ -1,36 +1,30 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <OutputType>Exe</OutputType>
-        <TargetFramework>netcoreapp2.2</TargetFramework>
+        <TargetFrameworks>net472;netstandard2.0</TargetFrameworks>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
-      <OutputPath>..\..\bin\Debug\</OutputPath>
+      <OutputPath>bin\Debug\</OutputPath>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
-      <OutputPath>..\..\bin\Release\</OutputPath>
+      <OutputPath>bin\Release\</OutputPath>
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="AngleSharp" Version="0.13.0" />
-      <PackageReference Include="CommandLineParser" Version="2.6.0" />
-      <PackageReference Include="Flurl" Version="2.8.2" />
-      <PackageReference Include="GitInfo" Version="2.0.20" />
-      <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="2.2.0" />
-      <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
-      <PackageReference Include="NLog" Version="4.6.7" />
-      <PackageReference Include="Scriban" Version="2.1.0" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Content Remove="Resources\seedrandom.min.js" />
-      <Content Remove="Resources\names.txt" />
       <EmbeddedResource Include="Resources\names.txt" />
     </ItemGroup>
 
     <ItemGroup>
+      <PackageReference Include="AngleSharp" Version="0.13.0" />
+      <PackageReference Include="Flurl" Version="2.8.2" />
+      <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="2.2.0" />
+      <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
+      <PackageReference Include="Scriban" Version="2.1.0" />
+    </ItemGroup>
+	
+	<ItemGroup>
       <None Update="Resources\template.html">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </None>
@@ -94,9 +88,6 @@
       <None Update="Resources\template.sbn-html">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </None>
-      <None Update="NLog.config">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
       <None Update="Resources\styles\drive.css">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </None>
@@ -148,6 +139,25 @@
       <None Update="Resources\styles\tomorr3.css">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </None>
+	  <None Update="Resources\emotki\cool.gif">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+	  <None Update="Resources\emotki\killer.gif">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+	  <None Update="Resources\emotki\lapka.gif">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+	  <None Update="Resources\emotki\rzygi.gif">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+	  <None Update="Resources\emotki\sex.gif">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
     </ItemGroup>
+	
+	<ItemGroup>
+	  <Reference Include="System.Net.Http" Condition="'$(TargetFramework)' == 'net472'" />
+	</ItemGroup>
 
 </Project>

@@ -1,4 +1,7 @@
-﻿### MonoDevelop template
+﻿# Cake
+tools/
+
+### MonoDevelop template
 #User Specific
 *.userprefs
 *.usertasks
