@@ -3,7 +3,7 @@ using System.Drawing;
 
 namespace MitsubaArchivizer.Models
 {
-    internal class Post
+    public class Post
     {
         public class PostFile
         {

@@ -1,6 +1,10 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MitsubaArchivizer.CLI", "MitsubaArchivizer\MitsubaArchivizer.csproj", "{25EEED96-12EE-41F7-893A-B87C01C4D133}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MitsubaArchivizer.CLI", "MitsubaArchivizer.CLI\MitsubaArchivizer.CLI.csproj", "{25EEED96-12EE-41F7-893A-B87C01C4D133}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MitsubaArchivizer", "MitsubaArchivizer\MitsubaArchivizer.csproj", "{8938FA38-80EF-4A4F-A689-10C17B237B57}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MitsubaArchivizer.GUI", "MitsubaArchivizer.GUI\MitsubaArchivizer.GUI.csproj", "{C1B30BEC-C8DF-4D3E-B943-C8C52537A6C1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -12,5 +16,13 @@ Global
 		{25EEED96-12EE-41F7-893A-B87C01C4D133}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{25EEED96-12EE-41F7-893A-B87C01C4D133}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{25EEED96-12EE-41F7-893A-B87C01C4D133}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8938FA38-80EF-4A4F-A689-10C17B237B57}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8938FA38-80EF-4A4F-A689-10C17B237B57}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8938FA38-80EF-4A4F-A689-10C17B237B57}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8938FA38-80EF-4A4F-A689-10C17B237B57}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C1B30BEC-C8DF-4D3E-B943-C8C52537A6C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C1B30BEC-C8DF-4D3E-B943-C8C52537A6C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C1B30BEC-C8DF-4D3E-B943-C8C52537A6C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C1B30BEC-C8DF-4D3E-B943-C8C52537A6C1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

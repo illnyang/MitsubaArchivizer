@@ -33,7 +33,7 @@ namespace MitsubaArchivizer.Utils
             const double s = 0.80;
             const double l = 0.61;
 
-            // dummy call to keep deterministic consistency with karakao ork. no kurwa moje najszczersze gratulacje djmati xD
+            // dummy call to keep deterministic consistency with karakao ork. no kurwa moje najszczersze gratulacje panie skandal xD
             rnd.Random();
 
             var idx = (int) Math.Floor(rnd.Random() * Names.Count);
