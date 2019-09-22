@@ -49,9 +49,9 @@ namespace MitsubaArchivizer
 
             OnPostWithMediaCount?.Invoke(allPosts.Count);
 
-            for (int i = 0; i < allPosts.Count; i++)
+            for (var i = 0; i < allPosts.Count; i++)
             {
-                Post post = allPosts[i];
+                var post = allPosts[i];
 
                 if (!ResolveMedia)
                 {
@@ -93,7 +93,10 @@ namespace MitsubaArchivizer
                             continue;
                         }
 
-                        File.WriteAllBytes(finalFilePath, await response.Content.ReadAsByteArrayAsync());
+                        using (var fs = new FileStream(finalFilePath, FileMode.CreateNew))
+                        {
+                            await (await response.Content.ReadAsStreamAsync()).CopyToAsync(fs);
+                        }
                     }
                 }
 
@@ -135,7 +138,10 @@ namespace MitsubaArchivizer
                                 continue;
                             }
 
-                            File.WriteAllBytes(finalThumbPath, await response.Content.ReadAsByteArrayAsync());
+                            using (var fs = new FileStream(finalThumbPath, FileMode.CreateNew))
+                            {
+                                await (await response.Content.ReadAsStreamAsync()).CopyToAsync(fs);
+                            }
                         }
                     }
 
