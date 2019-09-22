@@ -21,22 +21,11 @@ Task("Build")
     .IsDependentOn("Restore-NuGet-Packages")
     .Does(() =>
 {
-    if(IsRunningOnWindows())
-    {
-      MSBuild("./src/MitsubaArchivizer.GUI/MitsubaArchivizer.GUI.csproj", settings => {
-        settings
-            .SetConfiguration(configuration)
-            .WithProperty("OutputPath", MakeAbsolute(buildDir).FullPath);
-      });
-    }
-    else
-    {
-      XBuild("./src/MitsubaArchivizer.GUI/MitsubaArchivizer.GUI.csproj", settings => {
-        settings
-            .SetConfiguration(configuration)
-            .WithProperty("OutputPath", MakeAbsolute(buildDir).FullPath);
-      });
-    }
+    MSBuild("./src/MitsubaArchivizer.GUI/MitsubaArchivizer.GUI.csproj", settings => {
+    settings
+        .SetConfiguration(configuration)
+        .WithProperty("OutputPath", MakeAbsolute(buildDir).FullPath);
+    });
     
     DotNetCorePublish("./src/MitsubaArchivizer.CLI/MitsubaArchivizer.CLI.csproj", new DotNetCorePublishSettings
     {
@@ -50,7 +39,7 @@ Task("Zip")
     .IsDependentOn("Build")
     .Does(() =>
 {
-	CreateDirectory(publishDir);
+    CreateDirectory(publishDir);
     Zip(buildDir, publishDir + File("MitsubaArchivizer.zip"));
 });
 
