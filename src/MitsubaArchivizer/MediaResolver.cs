@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using MitsubaArchivizer.Models;
@@ -84,7 +85,12 @@ namespace MitsubaArchivizer
 
                 if (!File.Exists(finalFilePath))
                 {
-                    using (var hc = new HttpClient())
+                    var cookieContainer = new CookieContainer();
+                    Uri uri = new Uri(file.FileUrl);
+
+                    cookieContainer.Add(uri, new Cookie("regulamin", "accepted"));
+                    using (var handler = new HttpClientHandler() { CookieContainer = cookieContainer })
+                    using (var hc = new HttpClient(handler))
                     {
                         var response = await hc.GetAsync(file.FileUrl);
                         if (!response.IsSuccessStatusCode)
@@ -129,7 +135,12 @@ namespace MitsubaArchivizer
 
                     if (!File.Exists(finalThumbPath))
                     {
-                        using (var hc = new HttpClient())
+                        var cookieContainer = new CookieContainer();
+                        Uri uri = new Uri(file.FileThumbUrl);
+
+                        cookieContainer.Add(uri, new Cookie("regulamin", "accepted"));
+                        using (var handler = new HttpClientHandler() { CookieContainer = cookieContainer })
+                        using (var hc = new HttpClient(handler))
                         {
                             var response = await hc.GetAsync(file.FileThumbUrl);
                             if (!response.IsSuccessStatusCode)
