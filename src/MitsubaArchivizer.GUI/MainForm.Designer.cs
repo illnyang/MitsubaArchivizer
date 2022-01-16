@@ -132,7 +132,7 @@
             this.mediaExtTextbox.Name = "mediaExtTextbox";
             this.mediaExtTextbox.Size = new System.Drawing.Size(184, 20);
             this.mediaExtTextbox.TabIndex = 3;
-            this.mediaExtTextbox.Text = "gif,jpg,mp4,png,webm";
+            this.mediaExtTextbox.Text = "gif,jpg,mp4,png,webm,mp3";
             // 
             // groupByExtensionsCheckbox
             // 

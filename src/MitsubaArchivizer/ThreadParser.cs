@@ -224,7 +224,6 @@ namespace MitsubaArchivizer
                             x.HasAttribute("src"));
 
                     var fileThumbUrl = SanitizeRelativeSrcUrl(elemFileThumbImg?.GetAttribute("src"), 5);
-
                     if (fileThumbUrl != null)
                     {
                         result.File = new Post.PostFile
@@ -232,6 +231,15 @@ namespace MitsubaArchivizer
                             FileName = fileName,
                             FileUrl = fileUrl,
                             FileThumbUrl = fileThumbUrl
+                        };
+                    }
+                    else
+                    {
+                        result.File = new Post.PostFile
+                        {
+                            FileName = fileName,
+                            FileUrl = fileUrl,
+                            FileThumbUrl = "https://i.imgur.com/CbozdM8.png"
                         };
                     }
                 }
