@@ -127,6 +127,11 @@ namespace MitsubaArchivizer.GUI
             {
                 try
                 {
+                    if (line == "")
+                    {
+                        break;
+                    }
+
                     statusTextLabel.Text = "Parsing posts...";
 
                     var thread = await ThreadParser.TryParse(line);
