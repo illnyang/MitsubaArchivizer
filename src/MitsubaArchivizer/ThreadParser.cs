@@ -62,6 +62,9 @@ namespace MitsubaArchivizer
                     {
                         case 404:
                             throw new Exception($"Provided thread({board}_{id}) is either non-existent or was already deleted (404).");
+                        case 503:
+                            await ParseThreadInternal(threadUri, board, id);
+                            break;
                         case 520:
                             throw new Exception($"Karakao sie zesralo xD. (thread: {board}_{id})");
                         default:
